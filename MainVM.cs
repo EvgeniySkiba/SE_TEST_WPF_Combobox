@@ -7,6 +7,13 @@ using System.Windows.Input;
 
 namespace ComboboxBinding
 {
+    public enum ProgramLanguage
+    {
+        CPlusPlus = 2,
+        CSharp = 4,
+        FSharp = 5
+    };
+
     public class MainVM
     {
         private IList<string> standards = new List<string>();
@@ -14,6 +21,9 @@ namespace ComboboxBinding
 
         private IList<Place> places = new List<Place>();
         private Place selectedPlace;
+
+        private IList<KeyValuePair<int, string>> languages = new List<KeyValuePair<int, string>>();
+        private KeyValuePair<int, string> selectedLanguage;
 
         private IList<PlaceUsingTemplate> placesUsingTemplate = new List<PlaceUsingTemplate>();
         private PlaceUsingTemplate selectedPlaceUsingTemplate;
@@ -35,8 +45,27 @@ namespace ComboboxBinding
         /// </summary>
         private void PopulateComoboBoxes()
         {
-            Standards = new List<string>() { "First", "Second", "Third" };
 
+var res = Enum.GetValues(typeof(ProgramLanguage))
+    .Cast<ProgramLanguage>()
+    .Select(v => v.ToString())
+    .ToList();
+
+            var dict = new Dictionary<int, string>();
+            foreach (var name in Enum.GetNames(typeof(ProgramLanguage)))
+            {
+                dict.Add((int)Enum.Parse(typeof(ProgramLanguage), name), name);
+
+                int key = (int)Enum.Parse(typeof(ProgramLanguage), name);
+                string value = name;
+                KeyValuePair<int, string> keyVal = new KeyValuePair<int, string>(key,value);
+              
+
+                languages.Add(keyVal);
+            }
+
+            Standards = new List<string>() { "First", "Second", "Third" };
+  
             Places = new List<Place>() { new Place(){ID =1, City = "New Delhi", Country = "India"}, 
             new Place(){ID= 2, City = "Bangalore", Country = "India"}, 
             new Place(){ID = 3 ,City = "New York", Country = "USA"}, 
@@ -89,6 +118,19 @@ namespace ComboboxBinding
             }
         }
 
+        public IList<KeyValuePair<int, string>> Places2
+        {
+            get
+            {
+                return languages;
+            }
+            set
+            {
+                languages = value;
+            }
+        }
+
+
         public Place SelectedPlace
         {
             get
@@ -100,6 +142,19 @@ namespace ComboboxBinding
                 selectedPlace = value;
             }
         }
+
+        public KeyValuePair<int, string> SelectedPlace2
+        {
+            get
+            {
+                return selectedLanguage;
+            }
+            set
+            {
+                selectedLanguage = value;
+            }
+        }
+        
 
         public IList<PlaceUsingTemplate> PlacesUsingTemplate
         {

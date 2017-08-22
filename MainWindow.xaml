@@ -36,6 +36,10 @@
         <ComboBox HorizontalAlignment="Left" Margin="183,253,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Places}" SelectedValue="{Binding CityID, Mode=TwoWay}" SelectedValuePath="{Binding SelectedValuePath}" DisplayMemberPath="City"  />
         <TextBlock HorizontalAlignment="Left" Margin="117,217,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="183,217,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="120"/>
+
+
+        <ComboBox HorizontalAlignment="Left" Margin="13,80,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Places2}" SelectedItem="{Binding SelectedPlace2}" DisplayMemberPath="Value"  />
+
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="403,289,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
 
 
